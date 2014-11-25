@@ -46,6 +46,6 @@ module.exports = function(grunt) {
 
   // 自定义任务
   grunt.registerTask('test', ['connect', 'jshint', 'qunit']);
-  grunt.registerTask('mix', ['jshint', 'concat', 'uglify']);
+  grunt.registerTask('builder', ['jshint', 'concat', 'uglify']);
 
 };
