@@ -5,7 +5,7 @@
 ```shell
 	npm install
 ```
-** 下文以changeSkin为例
+*标注 &clubs; 下文以changeSkin为例*
 
 ## 使用方法
 ### 修改配置
