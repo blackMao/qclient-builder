@@ -1,10 +1,10 @@
 module.exports = {
 	project: 'changeSkin', //css、js名
 	directory: 'changeSkin', //工程目录名
-	token: 'fae22feee6e4e96e64756851ef4fd5a1', //从QCMS获取
-	//cssID: '1101058450',  //QCMS样式ID
-	//jsID: '1101058446',   //QCMS脚本ID
-	htmlID: '1100951708',   //QCMS页面ID
+	token: '', //从QCMS获取
+	//cssID: '',  //QCMS样式ID
+	//jsID: '',   //QCMS脚本ID
+	htmlID: '',   //QCMS页面ID
 	base : '../<%= directory %>',
 	// 临时目录配置
 	tmp : {

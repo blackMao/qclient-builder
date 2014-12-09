@@ -82,3 +82,38 @@
 		'qclient_result'
 	]
 ```
+
+#### grunt update
+更新页面到QCMS
+
+```js
+	[
+		'builder',
+		'qclient_buildhtml',
+		'qclient_update:html'
+	]
+```
+
+#### grunt publish-test
+发布到测试环境
+
+```js
+	[
+		'builder',
+		'qclient_buildhtml',
+		'qclient_update:html',
+		'qclient_publish:test'
+	]
+```
+
+#### grunt publish-online
+发布到线上环境
+
+```js
+	[
+		'builder',
+		'qclient_buildhtml',
+		'qclient_update:html',
+		'qclient_publish:online'
+	]
+```
