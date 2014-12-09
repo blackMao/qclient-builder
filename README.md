@@ -14,6 +14,10 @@
 	module.exports = {
     	project: 'changeSkin', //css、js名
     	directory: 'changeSkin', //工程目录名
+    	token: '', //从QCMS获取
+		//cssID: '',  //QCMS样式ID
+		//jsID: '',   //QCMS脚本ID
+		htmlID: '',   //QCMS页面ID
     	...
     }
 ```
@@ -29,11 +33,12 @@
 ```
 生成目录
 ```js
+	//本地测试使用
 	build
 		QClient.changeSkin.css //图片会上传静床并替换
 		QClient.base.js //QClient 基础js
 		QClient.changeSkin.js //换肤功能JS
-		index.html //替换css和js资源为待上线地址
+		build.html //替换css和js资源为待上线地址
 ```
 
 ### 运行命令
