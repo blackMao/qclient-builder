@@ -37,12 +37,34 @@ module.exports = function(grunt) {
 		'qclient_concat',
 //		'qclient_compress',
 		'qclient_buildhtml',
-		'qclient_copy:html',
-		'qclient_result'
+		'qclient_copy:html'
 	]);
 
 	//清理环境
 	grunt.registerTask('clean', [
 		'qclient_clean'
+	]);
+
+	//更新文件到QCMS
+	grunt.registerTask('update', [
+		'builder',
+		'qclient_buildhtml',
+		'qclient_update:html'
+	]);
+
+	//上传测试环境
+	grunt.registerTask('publish-test', [
+		'builder',
+		'qclient_buildhtml',
+		'qclient_update:html',
+		'qclient_publish:test'
+	]);
+
+	//上传线上环境
+	grunt.registerTask('publish-online', [
+		'builder',
+		'qclient_buildhtml',
+		'qclient_update:html',
+		'qclient_publish:online'
 	]);
 };

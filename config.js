@@ -1,6 +1,10 @@
 module.exports = {
 	project: 'changeSkin', //css、js名
 	directory: 'changeSkin', //工程目录名
+	token: 'fae22feee6e4e96e64756851ef4fd5a1', //从QCMS获取
+	//cssID: '1101058450',  //QCMS样式ID
+	//jsID: '1101058446',   //QCMS脚本ID
+	htmlID: '1100951708',   //QCMS页面ID
 	base : '../<%= directory %>',
 	// 临时目录配置
 	tmp : {
@@ -16,7 +20,9 @@ module.exports = {
 		listImg : '<%= tmp.list %>/img',
 		// 图片上传结果列表文件
 		uploadImg : '<%= tmp.listImg %>/img.json',
-		html: '<%= tmp.src %>/index.html'
+		html: '<%= tmp.src %>/index.html',
+		buildHtml: '<%= tmp.src %>/build.html',
+		publishHtml: '<%= tmp.src%>/publish.html'
 	},
 	// 输出目录配置
 	dest : {

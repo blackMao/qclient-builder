@@ -129,26 +129,11 @@ module.exports = function(grunt) {
 				'qclient_replaceimg',
 				'qclient_concat',
 				'qclient_buildhtml',
-				'qclient_copy:html',
-				'qclient_result'
+				'qclient_copy:html'
 			]
 		});
 
 		grunt.task.run('watch');
-	});
-
-	//日志
-	grunt.registerTask('qclient_result', function() {
-
-		grunt.task.requires('qclient_concat');
-
-		grunt.log.writeln('QClient-builder result:');
-		grunt.log.writeln(chalk.green('✔ ') + 'QClient.'+config.project+'.css: '+config.dest.cssFullFile);
-		grunt.log.writeln(chalk.green('✔ ') + 'QClient.base.js: '+config.dest.jsBaseFullFile);
-		grunt.log.writeln(chalk.green('✔ ') + 'QClient.'+config.project+'.js: '+config.dest.jsProjectFullFile);
-
-		grunt.task.requires('qclient_copy:html');
-		grunt.log.writeln(chalk.green('✔ ') +'visit this html:'+ config.dest.html);
 	});
 
 	//测试
@@ -260,7 +245,7 @@ module.exports = function(grunt) {
 			html: {
 				expand: true,
 				cwd: config.tmp.src,
-				src: '*.html',
+				src: 'build.html',
 				dest: config.dest.base,
 				filter: 'isFile'
 			}
@@ -291,11 +276,89 @@ module.exports = function(grunt) {
 				css: config.dest.cssFullFile,
 				jsBase: config.dest.jsBaseFullFile,
 				jsProject: config.dest.jsProjectFullFile,
-				html: config.tmp.html
+				html: config.tmp.html,
+				buildHtml: config.tmp.buildHtml,
+				publishHtml: config.tmp.publishHtml
 			}
 		});
 
 		grunt.task.run('qclient-task-buildhtml');
+	});
+
+	//测试获取qcms内容
+	grunt.registerTask('qclient_get_content', function() {
+
+		grunt.config('qclient-get-content', {
+			htmlContent: {
+				token: config.token,
+				object: 'page',
+				operation: 'retrieve',
+				id: config.htmlID,
+				dest: path.resolve(config.tmp.cacheHtml)
+			}
+		});
+
+		grunt.task.run('qclient-get-content');
+	});
+
+	//更新QCMS文件
+	grunt.registerTask('qclient_update', function(task) {
+
+		grunt.task.requires('qclient_buildhtml');
+
+		grunt.config('qclient-task-update', {
+			//todo qcms接口不支持
+			/*css: {
+				token: config.token,
+				object: 'style',
+				operation: 'retrieve',
+				id: config.cssID,
+				src: path.resolve(config.dest.cssFullFile)
+			},
+			js: {
+				token: config.token,
+				object: 'script',
+				operation: 'update',
+				id: config.jsID,
+				src: path.resolve(config.dest.jsProjectFullFile)
+			},*/
+			html: {
+				token: config.token,
+				object: 'page',
+				operation: 'update',
+				id: config.htmlID,
+				src: config.tmp.publishHtml
+			}
+		});
+
+		grunt.task.run('qclient-task-update'+ (task ? ':' + task : ''));
+	});
+
+	//上线测试环境和线上环境
+	grunt.registerTask('qclient_publish', function(task) {
+
+		grunt.task.requires('qclient_update:html');
+
+		grunt.config('qclient-task-pubilsh', {
+			test: {
+				token: config.token,
+				object: 'page',
+				operation: 'publish',
+				id: config.htmlID,
+				dest : 'test',
+				source : 'page'
+			},
+			online: {
+				token: config.token,
+				object: 'page',
+				operation: 'publish',
+				id: config.htmlID,
+				dest : 'online',
+				source : 'page'
+			}
+		});
+
+		grunt.task.run('qclient-task-pubilsh'+ (task ? ':' + task : ''));
 	});
 };
 
