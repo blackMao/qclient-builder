@@ -1,0 +1,14 @@
+.git
+.idea
+.project
+nohup.out
+.settings
+.DS_Store
+sftp-config.json
+
+*~
+*.diff
+*.patch
+*.log
+*.swp
+node_modules/
